@@ -47,7 +47,7 @@ model Goal {
   progress  Int          @default(0)
   note      String       @default("")
   order     Int          @default(0)
-  category  GoalCategory @default(PERSONAL)
+  category  GoalCategory @default(PROFESSIONAL)
   createdAt DateTime     @default(now())
 }
 
