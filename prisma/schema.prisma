@@ -42,12 +42,18 @@ model Todo {
 }
 
 model Goal {
-  id        String   @id @default(cuid())
+  id        String       @id @default(cuid())
   title     String
-  progress  Int      @default(0)
-  note      String   @default("")
-  order     Int      @default(0)
-  createdAt DateTime @default(now())
+  progress  Int          @default(0)
+  note      String       @default("")
+  order     Int          @default(0)
+  category  GoalCategory @default(PERSONAL)
+  createdAt DateTime     @default(now())
+}
+
+enum GoalCategory {
+  PROFESSIONAL
+  PERSONAL
 }
 
 model Idea {

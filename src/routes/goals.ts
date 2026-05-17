@@ -22,6 +22,7 @@ router.post("/", async (c) => {
       progress: body.progress ?? 0,
       note: body.note ?? "",
       order: count,
+      category: body.category ?? "PERSONAL",
     },
   });
   return c.json(goal, 201);
