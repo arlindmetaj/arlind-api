@@ -86,3 +86,13 @@ model Bookmark {
   tags      String[]
   createdAt DateTime @default(now())
 }
+
+// Freeform "Notes" feature (UI label: Notes). Distinct from Note (Journal).
+model Memo {
+  id        String   @id @default(cuid())
+  title     String   @default("")
+  content   String   @default("")
+  pinned    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

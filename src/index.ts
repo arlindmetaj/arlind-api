@@ -12,6 +12,7 @@ import todosRoutes     from "./routes/todos";
 import goalsRoutes     from "./routes/goals";
 import ideasRoutes     from "./routes/ideas";
 import notesRoutes     from "./routes/notes";
+import memosRoutes     from "./routes/memos";
 import bookmarksRoutes from "./routes/bookmarks";
 import seedRoutes      from "./routes/seed";
 
@@ -97,6 +98,14 @@ app.get("/openapi.json", (c) =>
         patch:  { tags: ["Notes"], summary: "Update a note",  parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }], requestBody: { content: { "application/json": { schema: { type: "object" } } } }, responses: { "200": { description: "Updated note" } } },
         delete: { tags: ["Notes"], summary: "Delete a note",  parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }], responses: { "204": { description: "Deleted" } } },
       },
+      "/memos": {
+        get:  { tags: ["Notes"], summary: "List notes", responses: { "200": { description: "Array of notes" } } },
+        post: { tags: ["Notes"], summary: "Add a note", requestBody: { required: true, content: { "application/json": { schema: { type: "object", properties: { title: { type: "string" }, content: { type: "string" }, pinned: { type: "boolean" } } } } } }, responses: { "201": { description: "Created note" } } },
+      },
+      "/memos/{id}": {
+        patch:  { tags: ["Notes"], summary: "Update a note", parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }], requestBody: { content: { "application/json": { schema: { type: "object" } } } }, responses: { "200": { description: "Updated note" } } },
+        delete: { tags: ["Notes"], summary: "Delete a note", parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }], responses: { "204": { description: "Deleted" } } },
+      },
       "/bookmarks": {
         get:  { tags: ["Bookmarks"], summary: "List bookmarks", responses: { "200": { description: "Array of bookmarks" } } },
         post: { tags: ["Bookmarks"], summary: "Add a bookmark", requestBody: { required: true, content: { "application/json": { schema: { type: "object", properties: { url: { type: "string" }, title: { type: "string" }, tags: { type: "array", items: { type: "string" } } }, required: ["url", "title"] } } } }, responses: { "201": { description: "Created bookmark" } } },
@@ -137,6 +146,7 @@ app.route("/todos",     todosRoutes);
 app.route("/goals",     goalsRoutes);
 app.route("/ideas",     ideasRoutes);
 app.route("/notes",     notesRoutes);
+app.route("/memos",     memosRoutes);
 app.route("/bookmarks", bookmarksRoutes);
 app.route("/seed",      seedRoutes);
 
